@@ -8,8 +8,12 @@ require_once 'classes/Autoloader.php';
 Autoloader::register();
 
 // On va instancier le compte
-$compte1 = new CompteCourant('Benoit', 500, 200);
-var_dump($compte1); 
+
+$client = new CompteClient('Bernard', 'Alter', 'Lille');
+$compte1 = new CompteCourant($client,500, 200);
+$compteEpargne = new CompteEpargne($client,200,5);
+var_dump($compteEpargne);
+var_dump($client);
 
 //$compteEpargne = new CompteEpargne('Benoit',200, 10); 
 //var_dump($compteEpargne);

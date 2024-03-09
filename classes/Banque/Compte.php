@@ -1,5 +1,6 @@
 <?php
 namespace App\Banque;
+use App\Client\Compte as CompteClient;
 /**
  * Objet Compte bancaire
  */
@@ -7,9 +8,9 @@ abstract class Compte {
     //Propriétés
     /**
      * Titulaire du compte
-     * @var string
+     * @var CompteClient
      */
-    private string $titulaire;
+    private CompteClient $titulaire;
 
     /**
      * Solde du compte
@@ -22,41 +23,46 @@ abstract class Compte {
 /**
  * Constructeur du compte bancaire
  *
- * @param string $nom Nom du titulaire 
+ * @param CompteClient $compte Compte client du titulaire du titulaire 
  * @param float $montant Montant du solde à l'ouverture
  */
-    public function __construct(string $nom, float $montant = 100) //Normalement les noms ne diffèrent pas
+    public function __construct(CompteClient $compte , float $montant = 100) //Normalement les noms ne diffèrent pas
     { //Précision de la valeur si cela n'est pas spécifié
         //On attribue le nom à la propriété titulaire de l'instance crée
-        $this->titulaire = $nom;
+        $this->titulaire = $compte;
 
         //Attriburion du montant à solde
         $this->solde = $montant;
     }
 /**
- * Méthode magique pour la conversion en chaîne de caractères
+ * Méthode magique pour la conversion en chaîne de caractères (Non utilisé)
  *
- * @return string
+ * //@return string
  */
-    public function __toString(){
-        return "Vous visualisez le compte de $this->titulaire, le solde est de $this->solde euros";
-    }
+    //public function __toString(){
+       // return "Vous visualisez le compte de $this->titulaire, le solde est de $this->solde euros";
+    //}
     
     //Accesseurs (Getter et Setter)
     /**
      * Getter de Titulaire - Retourne la valeur du titulaire du compte
      *
-     * @return string
+     * @return CompteClient
      */
-    public function getTitulaire(): string
+    public function getTitulaire(): CompteClient
     { 
         return $this->titulaire;
     }
-
-    public function setTitulaire(string $nom): self //Possible avec void mais self c'est pour le statique
+/**
+ * Modifie le nom du titulaire et retourne l'objet
+ *
+ * @param CompteClient $compte Compte client du titulaire
+ * @return Compte
+ */
+    public function setTitulaire(CompteClient $compte): self //Possible avec void mais self c'est pour le statique
     {
-        if($nom != "") {
-        $this->titulaire = $nom;
+        if(isset($compte)) {
+        $this->titulaire = $compte;
         }
         return $this;
     }
