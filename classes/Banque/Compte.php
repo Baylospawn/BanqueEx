@@ -10,7 +10,7 @@ abstract class Compte {
      * Titulaire du compte
      * @var CompteClient
      */
-    private CompteClient $titulaire;
+    private CompteClient $titular;
 
     /**
      * Solde du compte
